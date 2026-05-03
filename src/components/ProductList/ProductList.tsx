@@ -3,6 +3,7 @@ import type { Product } from '../../types/product';
 import { useProducts } from '../../hooks/useProducts';
 import { UI } from '../../config/constants';
 import { CATEGORIES } from '../../config/categories';
+import { SECTIONS } from '../../config/sections';
 import { ProductCard } from '../ProductCard/ProductCard';
 import styles from './ProductList.module.css';
 
@@ -20,6 +21,7 @@ type Props = {
 export const ProductList = ({ onSelectProduct }: Props) => {
   const { products } = useProducts();
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
+  const [activeSection, setActiveSection] = useState<string | null>(null);
   const [searchOpen, setSearchOpen] = useState(false);
   const [search, setSearch] = useState('');
   const [sortKey, setSortKey] = useState<SortKey>('oldest');
@@ -29,6 +31,7 @@ export const ProductList = ({ onSelectProduct }: Props) => {
     const q = search.trim().toLowerCase();
     return products
       .filter((p) => !activeCategory || p.category === activeCategory)
+      .filter((p) => !activeSection || p.section === activeSection)
       .filter((p) =>
         !q ||
         p.name.toLowerCase().includes(q) ||
@@ -40,7 +43,7 @@ export const ProductList = ({ onSelectProduct }: Props) => {
           ? a.entryDate.localeCompare(b.entryDate)
           : b.entryDate.localeCompare(a.entryDate),
       );
-  }, [products, activeCategory, search, sortKey]);
+  }, [products, activeCategory, activeSection, search, sortKey]);
 
   const toggleSearch = () => {
     setSearchOpen((v) => {
@@ -77,6 +80,35 @@ export const ProductList = ({ onSelectProduct }: Props) => {
               title={cat.label}
             >
               <span className={styles.pillEmoji}>{cat.emoji}</span>
+            </button>
+          ))}
+        </div>
+
+        <div className={styles.toggleGroup} role="tablist">
+          <button
+            className={[styles.togglePill, !activeSection ? styles.togglePillActive : ''].join(' ')}
+            onClick={() => setActiveSection(null)}
+            role="tab"
+            aria-selected={!activeSection}
+            title="Todas"
+          >
+            <span className={styles.pillAll}>Todo</span>
+          </button>
+          {SECTIONS.map((sec) => (
+            <button
+              key={sec.id}
+              className={[
+                styles.togglePill,
+                activeSection === sec.id ? styles.togglePillActive : '',
+              ].join(' ')}
+              onClick={() =>
+                setActiveSection((curr) => (curr === sec.id ? null : sec.id))
+              }
+              role="tab"
+              aria-selected={activeSection === sec.id}
+              title={sec.label}
+            >
+              <span className={styles.pillEmoji}>{sec.emoji}</span>
             </button>
           ))}
         </div>

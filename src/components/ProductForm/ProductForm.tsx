@@ -4,6 +4,7 @@ import { useProducts } from '../../hooks/useProducts';
 import { todayISO } from '../../utils/date';
 import { UI } from '../../config/constants';
 import { CATEGORIES } from '../../config/categories';
+import { SECTIONS } from '../../config/sections';
 import { Input } from '../Input/Input';
 import { Button } from '../Button/Button';
 import styles from './ProductForm.module.css';
@@ -20,6 +21,7 @@ export const ProductForm = ({ prefillId = '', editProduct, onDone }: Props) => {
 
   const [name, setName] = useState(editProduct?.name ?? '');
   const [category, setCategory] = useState(editProduct?.category ?? '');
+  const [section, setSection] = useState(editProduct?.section ?? '');
   const [entryDate, setEntryDate] = useState(editProduct?.entryDate ?? todayISO());
   const [description, setDescription] = useState(editProduct?.description ?? '');
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -28,6 +30,7 @@ export const ProductForm = ({ prefillId = '', editProduct, onDone }: Props) => {
     const next: Record<string, string> = {};
     if (!name.trim()) next.name = 'El nombre es obligatorio.';
     if (!category) next.category = 'Seleccioná una categoría.';
+    if (!section) next.section = 'Seleccioná una sección.';
     if (!entryDate) next.entryDate = 'La fecha es obligatoria.';
     setErrors(next);
     return Object.keys(next).length === 0;
@@ -37,9 +40,9 @@ export const ProductForm = ({ prefillId = '', editProduct, onDone }: Props) => {
     if (!validate()) return;
 
     if (isEditing && editProduct) {
-      edit({ ...editProduct, name, category, entryDate, description });
+      edit({ ...editProduct, name, category, section, entryDate, description });
     } else {
-      add({ id: prefillId, name, category, entryDate, description });
+      add({ id: prefillId, name, category, section, entryDate, description });
     }
     onDone();
   };
@@ -79,6 +82,27 @@ export const ProductForm = ({ prefillId = '', editProduct, onDone }: Props) => {
           ))}
         </div>
         {errors.category && <span className={styles.categoryError}>{errors.category}</span>}
+      </div>
+
+      <div className={styles.categoryField}>
+        <label className={styles.categoryLabel}>Sección</label>
+        <div className={styles.categoryOptions}>
+          {SECTIONS.map((sec) => (
+            <button
+              key={sec.id}
+              type="button"
+              className={[
+                styles.categoryBtn,
+                section === sec.id ? styles.categoryBtnActive : '',
+              ].join(' ')}
+              onClick={() => setSection(sec.id)}
+            >
+              <span className={styles.categoryEmoji}>{sec.emoji}</span>
+              <span>{sec.label}</span>
+            </button>
+          ))}
+        </div>
+        {errors.section && <span className={styles.categoryError}>{errors.section}</span>}
       </div>
 
       <Input

@@ -91,6 +91,11 @@
   flex-shrink: 0;
 }
 
+.section {
+  font-size: 0.95rem;
+  line-height: 1;
+}
+
 .id {
   font-size: 0.75rem;
   font-weight: 700;

@@ -1,6 +1,7 @@
 import type { Product } from '../../types/product';
 import { formatDate } from '../../utils/date';
 import { getCategoryEmoji } from '../../config/categories';
+import { getSectionEmoji } from '../../config/sections';
 import styles from './ProductCard.module.css';
 
 type Props = {
@@ -11,6 +12,7 @@ type Props = {
 
 export const ProductCard = ({ product, onClick, index = 0 }: Props) => {
   const emoji = getCategoryEmoji(product.category);
+  const sectionEmoji = getSectionEmoji(product.section);
   return (
   <button
     className={styles.card}
@@ -27,6 +29,7 @@ export const ProductCard = ({ product, onClick, index = 0 }: Props) => {
       )}
     </div>
     <div className={styles.right}>
+      <span className={styles.section}>{sectionEmoji}</span>
       <span className={styles.id}>#{product.id}</span>
       <span className={styles.date}>{formatDate(product.entryDate)}</span>
     </div>
