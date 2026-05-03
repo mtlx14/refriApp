@@ -1,0 +1,67 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.categoryField {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.categoryLabel {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #8A8DA8;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.categoryOptions {
+  display: flex;
+  gap: 10px;
+}
+
+.categoryBtn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 16px;
+  border: 1.5px solid #E8E9F2;
+  border-radius: 14px;
+  background: #ffffff;
+  color: #1A1B2E;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s, transform 0.1s;
+}
+
+.categoryBtn:active {
+  transform: scale(0.97);
+}
+
+.categoryBtnActive {
+  border-color: #1A1B2E;
+  background: #F4F5FB;
+}
+
+.categoryEmoji {
+  font-size: 1.25rem;
+  line-height: 1;
+}
+
+.categoryError {
+  font-size: 0.78rem;
+  color: #FF7BA9;
+}

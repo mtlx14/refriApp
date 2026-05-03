@@ -1,0 +1,45 @@
+.trigger {
+  background: #ffffff;
+  border: 1.5px solid #E8E9F2;
+  width: 42px;
+  height: 42px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #1A1B2E;
+  cursor: pointer;
+  transition: transform 0.1s, background 0.15s;
+}
+
+.trigger:active {
+  transform: scale(0.94);
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  background: #F4F5FB;
+  border-radius: 16px;
+  padding: 14px 16px;
+}
+
+.rowText {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.rowTitle {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #1A1B2E;
+}
+
+.rowMeta {
+  font-size: 0.78rem;
+  color: #8A8DA8;
+}

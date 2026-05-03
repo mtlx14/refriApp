@@ -1,0 +1,54 @@
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 14px 24px;
+  border: none;
+  border-radius: 999px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.15s, transform 0.1s;
+  white-space: nowrap;
+}
+
+.btn:active {
+  transform: scale(0.97);
+}
+
+.btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.fullWidth {
+  width: 100%;
+}
+
+.small {
+  padding: 8px 16px;
+  font-size: 0.82rem;
+}
+
+.primary {
+  background: linear-gradient(135deg, #5D7FF7 0%, #4267F3 100%);
+  color: #ffffff;
+}
+
+.secondary {
+  background: #E8E9F2;
+  color: #1A1B2E;
+}
+
+.danger {
+  background: linear-gradient(135deg, #F87171 0%, #DC2626 100%);
+  color: #ffffff;
+}
+
+.ghost {
+  background: transparent;
+  color: #8A8DA8;
+  padding-left: 8px;
+  padding-right: 8px;
+}

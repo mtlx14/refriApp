@@ -1,0 +1,60 @@
+.app {
+  max-width: 480px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.header {
+  padding: 16px 20px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.title {
+  font-size: 1.65rem;
+  font-weight: 700;
+  color: #1A1B2E;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.main {
+  padding: 4px 20px 110px;
+}
+
+.fab {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 40px);
+  max-width: 440px;
+  height: 60px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #5D7FF7 0%, #4267F3 100%);
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.15s;
+  z-index: 50;
+}
+
+.fab:active {
+  transform: translateX(-50%) scale(0.98);
+}
+
+.fab {
+  gap: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.fab svg {
+  width: 22px;
+  height: 22px;
+}

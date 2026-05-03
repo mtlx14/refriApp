@@ -1,0 +1,53 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(26, 27, 46, 0.4);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: flex-end;
+  z-index: 100;
+  animation: fadeIn 0.2s ease;
+}
+
+.sheet {
+  background: #ffffff;
+  border-radius: 28px 28px 0 0;
+  width: 100%;
+  max-height: 92dvh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 12px 24px calc(40px + env(safe-area-inset-bottom));
+  box-shadow: 0 -4px 40px rgba(26, 27, 46, 0.12);
+  animation: slideUp 0.25s ease;
+}
+
+.handle {
+  width: 40px;
+  height: 4px;
+  background: #E8E9F2;
+  border-radius: 999px;
+  margin: 0 auto 20px;
+}
+
+.title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1A1B2E;
+  margin: 0 0 20px;
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(100%); }
+  to   { transform: translateY(0); }
+}

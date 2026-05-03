@@ -1,0 +1,100 @@
+.card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: #ffffff;
+  border: none;
+  border-radius: 20px;
+  padding: 14px 16px;
+  width: 100%;
+  cursor: pointer;
+  text-align: left;
+  box-shadow: 0 6px 24px rgba(26, 27, 46, 0.08);
+  transition: transform 0.15s, box-shadow 0.15s;
+  animation: fadeInDown 0.35s ease both;
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.card:active {
+  transform: scale(0.98);
+  box-shadow: 0 2px 12px rgba(26, 27, 46, 0.05);
+}
+
+.icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: 700;
+  flex-shrink: 0;
+  background: #F4F5FB;
+  color: #1A1B2E;
+  line-height: 1;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  flex: 1;
+  min-width: 0;
+}
+
+.name {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1A1B2E;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.name::first-letter {
+  text-transform: uppercase;
+}
+
+.description {
+  font-size: 0.85rem;
+  color: #8A8DA8;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.description::first-letter {
+  text-transform: uppercase;
+}
+
+.date {
+  font-size: 0.78rem;
+  color: #8A8DA8;
+}
+
+.right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.id {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #8A8DA8;
+  letter-spacing: 0.04em;
+}
+

@@ -1,0 +1,165 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.hint {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1A1B2E;
+  align-self: flex-start;
+}
+
+.scanArea {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 24px;
+  overflow: hidden;
+  background: #0B0C18;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* html5-qrcode injects a video element and helpers — make video cover and hide its overlays/controls */
+.video :global(video) {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  display: block !important;
+  border-radius: 0 !important;
+}
+
+.video :global(#qr-shaded-region),
+.video :global(img),
+.video :global(button),
+.video :global(select),
+.video :global(a) {
+  display: none !important;
+}
+
+.viewfinder {
+  position: absolute;
+  width: 65%;
+  aspect-ratio: 1 / 1;
+  pointer-events: none;
+}
+
+.viewfinder::before,
+.viewfinder::after,
+.viewfinder > span::before,
+.viewfinder > span::after {
+  content: '';
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  border: 3px solid #ffffff;
+  border-radius: 4px;
+}
+
+.viewfinder::before {
+  top: 0; left: 0;
+  border-right: none;
+  border-bottom: none;
+  border-top-left-radius: 14px;
+}
+
+.viewfinder::after {
+  top: 0; right: 0;
+  border-left: none;
+  border-bottom: none;
+  border-top-right-radius: 14px;
+}
+
+.viewfinder > span::before {
+  bottom: 0; left: 0;
+  border-right: none;
+  border-top: none;
+  border-bottom-left-radius: 14px;
+}
+
+.viewfinder > span::after {
+  bottom: 0; right: 0;
+  border-left: none;
+  border-top: none;
+  border-bottom-right-radius: 14px;
+}
+
+.scanLine {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #5D7FF7, transparent);
+  box-shadow: 0 0 12px rgba(93, 127, 247, 0.8);
+  animation: scan 2.2s ease-in-out infinite;
+}
+
+@keyframes scan {
+  0%, 100% { top: 8%; opacity: 0.8; }
+  50% { top: 92%; opacity: 1; }
+}
+
+.hintText {
+  position: absolute;
+  bottom: 16px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+  pointer-events: none;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(11, 12, 24, 0.75);
+  z-index: 2;
+}
+
+.spinner {
+  width: 36px;
+  height: 36px;
+  border: 3px solid rgba(255,255,255,0.2);
+  border-top-color: #ffffff;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.errorText {
+  color: #FF7BA9;
+  font-size: 0.9rem;
+  text-align: center;
+  padding: 0 16px;
+}
+
+.manualBtn {
+  background: none;
+  border: none;
+  color: #8A8DA8;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: underline;
+  padding: 4px;
+}
