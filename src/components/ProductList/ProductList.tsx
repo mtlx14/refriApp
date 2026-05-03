@@ -1,9 +1,10 @@
-import { useMemo, useState, useRef, useEffect } from 'react';
+import { useMemo, useState } from 'react';
 import type { Product } from '../../types/product';
 import { useProducts } from '../../hooks/useProducts';
 import { UI } from '../../config/constants';
 import { CATEGORIES } from '../../config/categories';
 import { SECTIONS } from '../../config/sections';
+import { ToggleGroup } from '../ToggleGroup/ToggleGroup';
 import { ProductCard } from '../ProductCard/ProductCard';
 import styles from './ProductList.module.css';
 
@@ -22,54 +23,10 @@ export const ProductList = ({ onSelectProduct }: Props) => {
   const { products } = useProducts();
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
   const [activeSection, setActiveSection] = useState<string | null>(null);
-  const [categoryOpen, setCategoryOpen] = useState(false);
-  const [sectionOpen, setSectionOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [search, setSearch] = useState('');
   const [sortKey, setSortKey] = useState<SortKey>('oldest');
   const [sortMenuOpen, setSortMenuOpen] = useState(false);
-  const categoryTimerRef = useRef<NodeJS.Timeout | null>(null);
-  const sectionTimerRef = useRef<NodeJS.Timeout | null>(null);
-
-  const closeCategory = () => setCategoryOpen(false);
-  const closeSection = () => setSectionOpen(false);
-
-  const handleCategorySelect = (id: string | null) => {
-    setActiveCategory(id);
-    closeCategory();
-  };
-
-  const handleSectionSelect = (id: string | null) => {
-    setActiveSection(id);
-    closeSection();
-  };
-
-  const handleCategoryToggle = () => {
-    if (categoryTimerRef.current) clearTimeout(categoryTimerRef.current);
-    setCategoryOpen((v) => !v);
-    if (categoryOpen) {
-      categoryTimerRef.current = null;
-    } else {
-      categoryTimerRef.current = setTimeout(() => closeCategory(), 3000);
-    }
-  };
-
-  const handleSectionToggle = () => {
-    if (sectionTimerRef.current) clearTimeout(sectionTimerRef.current);
-    setSectionOpen((v) => !v);
-    if (sectionOpen) {
-      sectionTimerRef.current = null;
-    } else {
-      sectionTimerRef.current = setTimeout(() => closeSection(), 3000);
-    }
-  };
-
-  useEffect(() => {
-    return () => {
-      if (categoryTimerRef.current) clearTimeout(categoryTimerRef.current);
-      if (sectionTimerRef.current) clearTimeout(sectionTimerRef.current);
-    };
-  }, []);
 
   const filtered = useMemo(() => {
     const q = search.trim().toLowerCase();
@@ -89,81 +46,16 @@ export const ProductList = ({ onSelectProduct }: Props) => {
       );
   }, [products, activeCategory, activeSection, search, sortKey]);
 
-  const toggleSearch = () => {
-    setSearchOpen((v) => {
-      if (v) setSearch('');
-      return !v;
-    });
-  };
-
   return (
     <div className={styles.wrapper}>
       <div className={styles.topBar}>
-        <div className={styles.collapsibleGroup}>
-          <button
-            className={styles.collapsibleBtn}
-            onClick={handleCategoryToggle}
-            title="Categorías"
-          >
-            <span className={styles.selectedIcon}>
-              {CATEGORIES.find((c) => c.id === activeCategory)?.emoji || '🍽️'}
-            </span>
-          </button>
-          {categoryOpen && (
-            <div className={[styles.expandedMenu, styles.categoryMenu].join(' ')}>
-              <button
-                className={styles.menuOption}
-                onClick={() => handleCategorySelect(null)}
-              >
-                <span className={styles.optionEmoji}>🍽️</span>
-                <span>Todo</span>
-              </button>
-              {CATEGORIES.map((cat) => (
-                <button
-                  key={cat.id}
-                  className={styles.menuOption}
-                  onClick={() => handleCategorySelect(cat.id)}
-                >
-                  <span className={styles.optionEmoji}>{cat.emoji}</span>
-                  <span>{cat.label}</span>
-                </button>
-              ))}
-            </div>
-          )}
-        </div>
-
-        <div className={styles.collapsibleGroup}>
-          <button
-            className={styles.collapsibleBtn}
-            onClick={handleSectionToggle}
-            title="Secciones"
-          >
-            <span className={styles.selectedIcon}>
-              {SECTIONS.find((s) => s.id === activeSection)?.emoji || '🧊'}
-            </span>
-          </button>
-          {sectionOpen && (
-            <div className={[styles.expandedMenu, styles.sectionMenu].join(' ')}>
-              <button
-                className={styles.menuOption}
-                onClick={() => handleSectionSelect(null)}
-              >
-                <span className={styles.optionEmoji}>🧊</span>
-                <span>Todo</span>
-              </button>
-              {SECTIONS.map((sec) => (
-                <button
-                  key={sec.id}
-                  className={styles.menuOption}
-                  onClick={() => handleSectionSelect(sec.id)}
-                >
-                  <span className={styles.optionEmoji}>{sec.emoji}</span>
-                  <span>{sec.label}</span>
-                </button>
-              ))}
-            </div>
-          )}
-        </div>
+        <ToggleGroup
+          options={CATEGORIES.map((c) => ({ id: c.id, emoji: c.emoji, label: c.label }))}
+          activeId={activeCategory}
+          onSelect={setActiveCategory}
+          defaultEmoji="🍽️"
+          side="left"
+        />
 
         <div className={styles.actions}>
           <div className={styles.sortWrap}>
@@ -205,7 +97,12 @@ export const ProductList = ({ onSelectProduct }: Props) => {
 
           <button
             className={[styles.iconBtn, searchOpen ? styles.iconBtnActive : ''].join(' ')}
-            onClick={toggleSearch}
+            onClick={() => {
+              setSearchOpen((v) => {
+                if (v) setSearch('');
+                return !v;
+              });
+            }}
             aria-label="Buscar"
           >
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -214,6 +111,14 @@ export const ProductList = ({ onSelectProduct }: Props) => {
             </svg>
           </button>
         </div>
+
+        <ToggleGroup
+          options={SECTIONS.map((s) => ({ id: s.id, emoji: s.emoji, label: s.label }))}
+          activeId={activeSection}
+          onSelect={setActiveSection}
+          defaultEmoji="🧊"
+          side="right"
+        />
       </div>
 
       {searchOpen && (
