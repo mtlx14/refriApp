@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react';
+import { LayoutGroup, motion } from 'framer-motion';
 import type { Product } from '../../types/product';
 import { useProducts } from '../../hooks/useProducts';
 import { UI } from '../../config/constants';
@@ -49,13 +50,31 @@ export const ProductList = ({ onSelectProduct }: Props) => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.topBar}>
-        <ToggleGroup
-          options={CATEGORIES.map((c) => ({ id: c.id, emoji: c.emoji, label: c.label }))}
-          activeId={activeCategory}
-          onSelect={setActiveCategory}
-          defaultEmoji="🍽️"
-          side="left"
-        />
+        <LayoutGroup>
+          <motion.div
+            className={styles.toggles}
+            layout
+            transition={{ layout: { duration: 0.15, ease: 'linear' } }}
+          >
+            <ToggleGroup
+              options={CATEGORIES.map((c) => ({ id: c.id, emoji: c.emoji, label: c.label }))}
+              activeId={activeCategory}
+              onSelect={setActiveCategory}
+              defaultEmoji={!activeCategory ? CATEGORIES[0].emoji : undefined}
+              secondaryEmoji={!activeCategory && CATEGORIES.length > 1 ? CATEGORIES[1].emoji : undefined}
+              side="left"
+            />
+
+            <ToggleGroup
+              options={SECTIONS.map((s) => ({ id: s.id, emoji: s.emoji, label: s.label }))}
+              activeId={activeSection}
+              onSelect={setActiveSection}
+              defaultEmoji={!activeSection ? SECTIONS[0].emoji : undefined}
+              secondaryEmoji={!activeSection && SECTIONS.length > 1 ? SECTIONS[1].emoji : undefined}
+              side="right"
+            />
+          </motion.div>
+        </LayoutGroup>
 
         <div className={styles.actions}>
           <div className={styles.sortWrap}>
@@ -111,14 +130,6 @@ export const ProductList = ({ onSelectProduct }: Props) => {
             </svg>
           </button>
         </div>
-
-        <ToggleGroup
-          options={SECTIONS.map((s) => ({ id: s.id, emoji: s.emoji, label: s.label }))}
-          activeId={activeSection}
-          onSelect={setActiveSection}
-          defaultEmoji="🧊"
-          side="right"
-        />
       </div>
 
       {searchOpen && (

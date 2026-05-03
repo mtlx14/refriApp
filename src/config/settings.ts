@@ -16,18 +16,18 @@ export const SETTINGS = {
 
     /** Tamaño de la etiqueta individual en mm. */
     label: {
-      widthMm: 40,
-      heightMm: 50,
-      qrSizeMm: 32,
-      idFontSizePt: 12,
+      widthMm: 17,
+      heightMm: 16,
+      qrSizeMm: 12,
+      idFontSizePt: 5,
     },
 
-    /** Layout de la página A4 (mm). */
+    /** Layout de la página A4 (mm). 10 cols × 15 filas = 150 por página. */
     page: {
       format: 'a4' as const,
       orientation: 'portrait' as const,
-      marginMm: 10,
-      gapMm: 4,
+      marginMm: 8,
+      gapMm: 2,
     },
 
     /** Nombre del archivo PDF descargado. */

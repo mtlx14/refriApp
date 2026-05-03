@@ -22,7 +22,15 @@
   outline: none;
   transition: border-color 0.15s;
   width: 100%;
+  min-width: 0;
   box-sizing: border-box;
+  font-family: inherit;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.input[type="date"] {
+  min-height: 51px;
 }
 
 .input:focus {

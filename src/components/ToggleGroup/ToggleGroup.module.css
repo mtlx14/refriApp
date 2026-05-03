@@ -1,12 +1,5 @@
 .wrapper {
   position: relative;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.wrapperRight {
-  align-items: flex-end;
 }
 
 .toggle {
@@ -14,86 +7,86 @@
   border: none;
   padding: 0;
   cursor: pointer;
-  display: inline-flex;
-  align-items: center;
 }
 
 .pillsContainer {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: -20px;
   background: #ffffff;
   border: 1.5px solid #E8E9F2;
   border-radius: 999px;
   padding: 4px;
   position: relative;
-  min-height: 56px;
+  width: fit-content;
+  height: 44px;
+  box-sizing: border-box;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.inner {
+  display: inline-flex;
+  align-items: center;
+}
+
+.expandedRow {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
 }
 
 .pill {
-  width: 48px;
-  height: 48px;
-  border-radius: 999px;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
+  height: 36px;
+  padding: 0 14px;
+  border: none;
+  background: transparent;
+  border-radius: 999px;
   cursor: pointer;
-  transition: background 0.15s;
+  transition: background 0.15s, transform 0.1s, color 0.15s;
+  color: #1A1B2E;
   flex-shrink: 0;
-  position: relative;
-}
-
-.pill:hover {
-  background: #F4F5FB;
+  white-space: nowrap;
 }
 
 .pill:active {
   transform: scale(0.94);
 }
 
+.pillActive {
+  background: linear-gradient(135deg, #5D7FF7 0%, #4267F3 100%);
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(66, 103, 243, 0.28);
+}
+
+.pillInactive {
+  background: transparent;
+}
+
 .emoji {
-  font-size: 1.4rem;
+  font-size: 1.15rem;
   line-height: 1;
+  position: relative;
 }
 
-.optionsList {
-  list-style: none;
-  margin: 0;
-  padding: 6px;
-  background: #ffffff;
-  border: 1.5px solid #E8E9F2;
-  border-radius: 16px;
-  box-shadow: 0 12px 32px rgba(26, 27, 46, 0.14);
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
+.pillText {
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
 }
 
-.option {
-  display: flex;
+.overlappedEmojis {
+  display: inline-flex;
   align-items: center;
-  gap: 10px;
-  background: none;
-  border: none;
-  padding: 10px 14px;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: background 0.1s;
-  color: #1A1B2E;
-  font-size: 0.9rem;
-  text-align: left;
-  white-space: nowrap;
+  gap: 2px;
 }
 
-.option:hover {
-  background: #F4F5FB;
+.overlappedEmojis .emoji {
+  font-size: 1.15rem;
 }
 
-.option:active {
-  background: #E8E9F2;
-}
-
-.optionEmoji {
-  font-size: 1.2rem;
-  line-height: 1;
+.overlappedEmojis .emoji.secondary {
+  font-size: 1.15rem;
 }

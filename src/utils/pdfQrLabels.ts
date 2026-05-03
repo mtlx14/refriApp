@@ -53,13 +53,14 @@ export const generateQrLabelsPdf = async (
       color: { dark: '#1A1B2E', light: '#FFFFFF' },
     });
 
+    const textBlockMm = label.idFontSizePt * 0.45;
     const qrX = x + (label.widthMm - label.qrSizeMm) / 2;
-    const qrY = y + (label.heightMm - label.qrSizeMm - 6) / 2;
+    const qrY = y + (label.heightMm - label.qrSizeMm - textBlockMm) / 2;
     doc.addImage(qrDataUrl, 'PNG', qrX, qrY, label.qrSizeMm, label.qrSizeMm, undefined, 'FAST');
 
     doc.setFontSize(label.idFontSizePt);
     doc.setTextColor(26, 27, 46);
-    doc.text(id, x + label.widthMm / 2, qrY + label.qrSizeMm + 5, { align: 'center' });
+    doc.text(id, x + label.widthMm / 2, qrY + label.qrSizeMm + textBlockMm, { align: 'center' });
 
     lastId = id;
     placed++;

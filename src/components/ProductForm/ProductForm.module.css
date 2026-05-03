@@ -4,6 +4,16 @@
   gap: 16px;
 }
 
+.row {
+  display: flex;
+  gap: 12px;
+}
+
+.rowItem {
+  flex: 1;
+  min-width: 0;
+}
+
 .actions {
   display: flex;
   flex-direction: column;

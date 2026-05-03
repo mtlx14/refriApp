@@ -49,12 +49,26 @@ export const ProductForm = ({ prefillId = '', editProduct, onDone }: Props) => {
 
   return (
     <div className={styles.form}>
-      <Input
-        label={UI.form.labelId}
-        value={isEditing ? (editProduct?.id ?? '') : prefillId}
-        onChange={() => {}}
-        readOnly
-      />
+      <div className={styles.row}>
+        <div className={styles.rowItem}>
+          <Input
+            label={UI.form.labelId}
+            value={isEditing ? (editProduct?.id ?? '') : prefillId}
+            onChange={() => {}}
+            readOnly
+          />
+        </div>
+        <div className={styles.rowItem}>
+          <Input
+            label={UI.form.labelEntryDate}
+            value={entryDate}
+            onChange={setEntryDate}
+            type="date"
+            error={errors.entryDate}
+          />
+        </div>
+      </div>
+
       <Input
         label={UI.form.labelName}
         value={name}
@@ -105,13 +119,6 @@ export const ProductForm = ({ prefillId = '', editProduct, onDone }: Props) => {
         {errors.section && <span className={styles.categoryError}>{errors.section}</span>}
       </div>
 
-      <Input
-        label={UI.form.labelEntryDate}
-        value={entryDate}
-        onChange={setEntryDate}
-        type="date"
-        error={errors.entryDate}
-      />
       <Input
         label={UI.form.labelDescription}
         value={description}

@@ -5,8 +5,8 @@ export type Section = {
 };
 
 export const SECTIONS: Section[] = [
-  { id: 'refrigerator', label: 'Refrigerador', emoji: '❄️' },
-  { id: 'freezer', label: 'Congelador', emoji: '☃️' },
+  { id: 'refrigerator', label: 'Refrigerador', emoji: '🏠' },
+  { id: 'freezer', label: 'Congelador', emoji: '❄️' },
 ];
 
 export const getSectionEmoji = (id: string): string =>
